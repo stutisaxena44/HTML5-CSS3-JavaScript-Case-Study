@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workers — SkillHire</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- LOCATION MODAL -->
+<div class="location-overlay" id="locationModal">
+  <div class="location-modal">
+    <div class="loc-icon">📍</div>
+    <h2>Where are you located?</h2>
+    <p>Select your city to see workers near you.</p>
+    <div class="loc-pincode-row">
+      <input type="text" id="pincodeInput" placeholder="Enter pincode to auto-detect city" maxlength="6" />
+      <div id="pincodeStatus" class="pincode-status"></div>
+    </div>
+    <div class="loc-divider"><span>or choose your city</span></div>
+    <div class="loc-city-grid" id="cityGrid"></div>
+    <button class="loc-confirm-btn" id="locConfirm">Confirm Location →</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Skill<span>Hire</span></a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="workers.html">Workers</a></li>
+    <li><a href="account.html">My Account</a></li>
+    <li><a href="booking.html" class="btn-nav">Book Now</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <span class="nav-location-pill" id="navLocationPill" style="margin-left:16px;">📍 Bangalore</span>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80')"></div>
+  <div class="page-hero-content">
+    <div class="eyebrow" style="color:var(--accent);border-color:var(--accent);">Our Team</div>
+    <h1>Meet the Workers</h1>
+    <p>Click any profile to view full details and book directly.</p>
+  </div>
+</div>
+
+<!-- WORKERS SECTION -->
+<section>
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <label>Category:</label>
+    <select id="workerFilter">
+      <option value="all">All Workers</option>
+      <option value="electrician">⚡ Electrician</option>
+      <option value="plumber">🔧 Plumber</option>
+      <option value="cleaner">🧹 Cleaner</option>
+      <option value="tutor">📚 Tutor</option>
+      <option value="delivery">📦 Delivery</option>
+      <option value="painter">🎨 Painter</option>
+    </select>
+    <span class="filter-location-tag" id="filterLocationTag" onclick="document.getElementById('locationModal').classList.add('open')">📍 Bangalore ✏️</span>
+  </div>
+
+  <!-- Cards injected here by script.js renderWorkerCards() -->
+  <div class="cards-grid" id="workerGrid"></div>
+</section>
+
+<!-- WORKER DETAIL POPUP MODAL -->
+<div class="modal-overlay" id="workerModal">
+  <div class="modal">
+    <!-- Illustration header -->
+    <div class="modal-illus" id="modalIllus">
+      <span class="modal-illus-icon" style="font-size:5.5rem">⚡</span>
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-illus-bar">
+        <div>
+          <h2 id="modalName">Worker Name</h2>
+          <p id="modalCat">Category</p>
+        </div>
+        <span id="modalStatus" class="tag tag-available">Available</span>
+      </div>
+    </div>
+
+    <!-- Details -->
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="m-item"><div class="lbl">Rating</div><div class="val" id="modalRating">—</div></div>
+        <div class="m-item"><div class="lbl">Experience</div><div class="val" id="modalExp">—</div></div>
+        <div class="m-item"><div class="lbl">Location</div><div class="val" id="modalLocation">—</div></div>
+        <div class="m-item"><div class="lbl">Hourly Rate</div><div class="val" id="modalRate">—</div></div>
+      </div>
+      <div class="modal-divider"></div>
+      <div class="reviews-label">Customer Reviews</div>
+      <div id="modalReviews"></div>
+    </div>
+
+    <!-- Book button -->
+    <div class="modal-bar">
+      <div class="modal-rate"><span id="modalRateBottom">₹0</span> <small>/hr</small></div>
+      <a href="booking.html" id="modalBookBtn" class="btn btn-dark">Book This Worker →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="index.html" class="logo">Skill<span>Hire</span></a><p>Connecting people with trusted local gig workers.</p></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">All Services</a></li></ul></div>
+    <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="account.html">My Account</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li>hello@skillhire.com</li><li>+91 9653188219</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 SkillHire.</span><span class="footer-credit">Made by Stuti Saxena</span><div class="footer-social"><a href="#">🐦</a><a href="#">📷</a><a href="#">💼</a></div></div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

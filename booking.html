@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Worker — SkillHire</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- LOCATION MODAL -->
+<div class="location-overlay" id="locationModal">
+  <div class="location-modal">
+    <div class="loc-icon">📍</div>
+    <h2>Where are you located?</h2>
+    <p>Select your city to see workers near you.</p>
+    <div class="loc-pincode-row">
+      <input type="text" id="pincodeInput" placeholder="Enter pincode to auto-detect city" maxlength="6" />
+      <div id="pincodeStatus" class="pincode-status"></div>
+    </div>
+    <div class="loc-divider"><span>or choose your city</span></div>
+    <div class="loc-city-grid" id="cityGrid"></div>
+    <button class="loc-confirm-btn" id="locConfirm">Confirm Location →</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Skill<span>Hire</span></a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="workers.html">Workers</a></li>
+    <li><a href="account.html">My Account</a></li>
+    <li><a href="booking.html" class="btn-nav">Book Now</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <span class="nav-location-pill" id="navLocationPill" style="margin-left:16px;">📍 Bangalore</span>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1621905251189-08b45249ff78?w=1400&q=80')"></div>
+  <div class="page-hero-content">
+    <div class="eyebrow" style="color:var(--accent);border-color:var(--accent);">Reserve</div>
+    <h1>Book a Worker</h1>
+    <p>Choose your service, pick a slot — cost updates live as you fill the form.</p>
+  </div>
+</div>
+
+<section>
+  <div class="booking-layout">
+
+    <!-- LEFT: FORM -->
+    <div class="form-box">
+      <h2>Booking Details</h2>
+      <div class="success-banner" id="bookingConfirm">✅ Booking confirmed! You will receive a confirmation shortly.</div>
+
+      <form id="bookingForm">
+        <div class="form-group">
+          <label>Selected Worker</label>
+          <input type="text" id="workerName" placeholder="e.g. Ramesh Kumar (or leave blank for any)" />
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="customerName" placeholder="e.g. Arjun Rao" />
+          </div>
+          <div class="form-group">
+            <label>Your Phone</label>
+            <input type="tel" id="customerPhone" placeholder="+91 98765 43210" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="serviceType">Service Type</label>
+          <select id="serviceType">
+            <option value="electrician">⚡ Electrician — from ₹700/hr</option>
+            <option value="plumber">🔧 Plumber — from ₹600/hr</option>
+            <option value="cleaner">🧹 Cleaner — from ₹1300/hr</option>
+            <option value="tutor">📚 Tutor — from ₹1700/hr</option>
+            <option value="delivery">📦 Delivery — from ₹1000/hr</option>
+            <option value="painter">🎨 Painter — from ₹1600/hr</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bookingDate">Date</label>
+          <input type="date" id="bookingDate" required />
+        </div>
+        <div class="form-group">
+          <label>Time Slot</label>
+          <div class="time-slots">
+            <label class="slot-label"><input type="radio" name="slot" value="9am" /><span>9:00 AM</span></label>
+            <label class="slot-label"><input type="radio" name="slot" value="11am" /><span>11:00 AM</span></label>
+            <label class="slot-label"><input type="radio" name="slot" value="1pm" /><span>1:00 PM</span></label>
+            <label class="slot-label"><input type="radio" name="slot" value="3pm" /><span>3:00 PM</span></label>
+            <label class="slot-label"><input type="radio" name="slot" value="5pm" /><span>5:00 PM</span></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hoursRequired">Hours Required</label>
+          <input type="number" id="hoursRequired" value="2" min="1" max="12" step="0.5" />
+        </div>
+        <div class="form-group">
+          <label>Optional Add-ons</label>
+          <label class="addon-label">
+            <input type="checkbox" id="emergencyService" />
+            <div><strong>🚨 Emergency Service</strong><br /><small>Priority dispatch within 1hr (+₹1000)</small></div>
+          </label>
+          <label class="addon-label">
+            <input type="checkbox" id="toolsProvided" />
+            <div><strong>🛠️ Tools Provided</strong><br /><small>Worker brings all equipment (+₹800)</small></div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="notes">Special Instructions (optional)</label>
+          <textarea id="notes" rows="3" placeholder="Describe the job in detail..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-dark" style="width:100%;font-size:.95rem;">Confirm Booking →</button>
+      </form>
+    </div>
+
+    <!-- RIGHT: SUMMARY -->
+    <div class="summary-box">
+      <h3>Cost Summary</h3>
+      <div class="summary-row"><span class="lbl">Service</span><span class="val" id="sumService">Electrician</span></div>
+      <div class="summary-row"><span class="lbl">Rate</span><span class="val" id="sumRate">—</span></div>
+      <div class="summary-row"><span class="lbl">Hours</span><span class="val" id="sumHours">—</span></div>
+      <div class="summary-row"><span class="lbl">Add-ons</span><span class="val" id="sumAddons">₹0</span></div>
+      <div class="summary-row"><span class="lbl">Worker earns (90%)</span><span class="val" id="sumWorker">—</span></div>
+      <div class="summary-row"><span class="lbl">Platform fee (10%)</span><span class="val" id="sumCommission">—</span></div>
+      <div class="summary-total">
+        <span class="lbl">Total</span>
+        <span class="val" id="sumTotal">—</span>
+      </div>
+      <div class="commission-note">💡 Platform takes 10% per booking. Workers receive the remaining 90%.</div>
+      <div style="margin-top:18px;"><a href="#bookingForm" class="btn btn-accent" style="width:100%;text-align:center;display:block;">Go to Form ↑</a></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="index.html" class="logo">Skill<span>Hire</span></a><p>Connecting people with trusted local gig workers.</p></div>
+    <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="account.html">My Account</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li>hello@skillhire.com</li><li>+91 9653188219</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 SkillHire.</span><span class="footer-credit">Made by Stuti Saxena</span><div class="footer-social"><a href="#">🐦</a><a href="#">📷</a><a href="#">💼</a></div></div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

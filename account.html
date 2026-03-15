@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account — SkillHire</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- LOCATION MODAL — city only -->
+<div class="location-overlay" id="locationModal">
+  <div class="location-modal">
+    <div class="loc-icon">📍</div>
+    <h2>Where are you located?</h2>
+    <p>Select your city to see workers and prices near you.</p>
+    <div class="loc-pincode-row">
+      <input type="text" id="pincodeInput" placeholder="Enter pincode to auto-detect city" maxlength="6" />
+      <div id="pincodeStatus" class="pincode-status"></div>
+    </div>
+    <div class="loc-divider"><span>or choose your city</span></div>
+    <div class="loc-city-grid" id="cityGrid"></div>
+    <button class="loc-confirm-btn" id="locConfirm" style="margin-top:8px;">Confirm Location →</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Skill<span>Hire</span></a>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="workers.html">Workers</a></li>
+    <li><a href="account.html">My Account</a></li>
+    <li><a href="booking.html" class="btn-nav">Book Now</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <span class="nav-location-pill" id="navLocationPill" style="margin-left:16px;">📍 Bangalore</span>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1400&q=80')"></div>
+  <div class="page-hero-content">
+    <div class="eyebrow" style="color:var(--accent);border-color:var(--accent);">Account</div>
+    <h1>My Account</h1>
+    <p>Manage your profile, saved addresses, bookings and ratings.</p>
+  </div>
+</div>
+
+<section>
+  <div class="account-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="account-sidebar">
+      <div class="account-avatar-box">
+        <div class="avatar-circle" id="sidebarInitial">?</div>
+        <h3 id="sidebarName">Your Name</h3>
+        <p id="sidebarPhone">Create a profile to get started</p>
+      </div>
+      <ul class="account-nav">
+        <li><a href="#" class="active" data-tab="profile"><span class="nav-icon">👤</span> My Profile</a></li>
+        <li><a href="#" data-tab="addresses"><span class="nav-icon">📍</span> Saved Addresses</a></li>
+        <li><a href="#" data-tab="bookings"><span class="nav-icon">📋</span> Booking History</a></li>
+        <li><a href="#" data-tab="rating"><span class="nav-icon">⭐</span> My Rating</a></li>
+      </ul>
+    </aside>
+
+    <div class="account-main">
+
+      <!-- ===== PROFILE PANEL ===== -->
+      <div class="account-panel active" id="panel-profile">
+
+        <!-- CREATE FORM -->
+        <div id="profileCreateForm">
+          <div class="profile-create-box">
+            <h3>Create Your Profile</h3>
+            <p class="sub">Fill in your details to get started. Your info is saved in your browser.</p>
+            <form id="profileForm">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div class="form-group">
+                  <label>Full Name *</label>
+                  <input type="text" id="pf_name" placeholder="e.g. Arjun Rao" />
+                </div>
+                <div class="form-group">
+                  <label>Phone Number *</label>
+                  <input type="tel" id="pf_phone" placeholder="+91 98765 43210" />
+                </div>
+                <div class="form-group">
+                  <label>Email Address</label>
+                  <input type="email" id="pf_email" placeholder="arjun@email.com" />
+                </div>
+                <div class="form-group">
+                  <label>Date of Birth</label>
+                  <input type="date" id="pf_dob" />
+                </div>
+                <div class="form-group">
+                  <label>Gender</label>
+                  <select id="pf_gender">
+                    <option value="">Prefer not to say</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-dark" style="margin-top:8px;">Save Profile →</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- SAVED PROFILE VIEW -->
+        <div id="profileSaved" style="display:none;">
+          <div class="profile-saved-box">
+            <div class="profile-saved-header">
+              <div class="profile-saved-avatar" id="disp_initial">?</div>
+              <div>
+                <h3 id="disp_name">—</h3>
+                <p id="disp_phone">—</p>
+              </div>
+            </div>
+            <div class="profile-saved-body">
+              <div class="info-row"><span class="lbl">Email</span><span class="val" id="disp_email">—</span></div>
+              <div class="info-row"><span class="lbl">Date of Birth</span><span class="val" id="disp_dob">—</span></div>
+              <div class="info-row"><span class="lbl">Gender</span><span class="val" id="disp_gender">—</span></div>
+              <div class="info-row"><span class="lbl">City</span><span class="val" id="disp_city">—</span></div>
+              <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;">
+                <button class="btn btn-outline" id="editProfileBtn" style="font-size:.85rem;padding:9px 20px;">✏️ Edit Profile</button>
+                <button class="btn" style="font-size:.85rem;padding:9px 20px;background:var(--cream2);color:var(--text);border:1px solid var(--border);"
+                  onclick="if(confirm('Delete your profile?')){sessionStorage.removeItem('sh_profile');location.reload();}">🗑 Delete Profile</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="account-card">
+            <h3>Quick Stats</h3>
+            <div class="profile-grid">
+              <div class="profile-item"><div class="lbl">Total Bookings</div><div class="val" id="statTotal">0</div></div>
+              <div class="profile-item"><div class="lbl">Upcoming</div><div class="val" id="statUpcoming">0</div></div>
+              <div class="profile-item"><div class="lbl">Completed</div><div class="val" id="statDone">0</div></div>
+              <div class="profile-item"><div class="lbl">My Rating</div><div class="val" id="statRating">No ratings yet</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end panel-profile -->
+
+
+      <!-- ===== ADDRESSES ===== -->
+      <div class="account-panel" id="panel-addresses">
+        <div class="account-card">
+          <h3>Saved Addresses</h3>
+          <div id="addressList">
+            <div class="address-item">
+              <div class="addr-info"><h4>🏠 Home <span class="addr-badge">Default</span></h4><p>42, 3rd Cross, HSR Layout, Bengaluru – 560102</p></div>
+              <button class="addr-del">🗑 Remove</button>
+            </div>
+            <div class="address-item">
+              <div class="addr-info"><h4>🏢 Office</h4><p>Tower B, Prestige Tech Park, Whitefield, Bengaluru – 560066</p></div>
+              <button class="addr-del">🗑 Remove</button>
+            </div>
+          </div>
+          <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+            <p style="font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Add New Address</p>
+            <div class="form-group"><label>Label</label><input type="text" id="newAddrLabel" placeholder="e.g. Parents House" /></div>
+            <div class="form-group"><label>Full Address</label><textarea id="newAddrText" rows="2" placeholder="Street, Area, City, Pincode"></textarea></div>
+            <button class="btn btn-dark" id="addAddressBtn" style="font-size:.85rem;padding:9px 22px;">+ Save Address</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ===== BOOKING HISTORY ===== -->
+      <div class="account-panel" id="panel-bookings">
+        <div class="account-card">
+          <h3>Booking History</h3>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:18px;">Every booking you make on SkillHire is automatically saved here.</p>
+
+          <!-- Total spent summary -->
+          <div id="spentSummary" style="display:none;background:var(--charcoal);color:#fff;border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;gap:32px;flex-wrap:wrap;align-items:center;">
+            <div>
+              <div style="font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px;">Total Spent</div>
+              <div style="font-size:1.6rem;font-family:'Playfair Display',serif;font-weight:700;color:var(--accent);" id="totalSpentAmt">₹0</div>
+            </div>
+            <div>
+              <div style="font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px;">Total Bookings</div>
+              <div style="font-size:1.6rem;font-family:'Playfair Display',serif;font-weight:700;" id="totalSpentCount">0</div>
+            </div>
+            <div>
+              <div style="font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px;">Avg. per Booking</div>
+              <div style="font-size:1.6rem;font-family:'Playfair Display',serif;font-weight:700;" id="totalSpentAvg">₹0</div>
+            </div>
+          </div>
+
+          <div id="bookingHistoryList"></div>
+        </div>
+      </div>
+
+
+      <!-- ===== MY RATING ===== -->
+      <div class="account-panel" id="panel-rating">
+        <div class="account-card">
+          <h3>My Rating — Rated by Workers</h3>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:18px;">Workers rate customers after each booking. Your rating grows as you use the platform.</p>
+
+          <!-- Shown when 0 bookings -->
+          <div class="no-rating-msg" id="noRatingMsg">
+            <div class="nr-icon">⭐</div>
+            <p style="font-weight:600;margin-bottom:6px;">No rating yet</p>
+            <p>Complete your first booking to receive a rating from a worker.</p>
+            <a href="services.html" class="btn btn-dark" style="font-size:.82rem;padding:9px 20px;margin-top:14px;display:inline-block;">Browse Services →</a>
+          </div>
+
+          <!-- Shown when bookings exist -->
+          <div id="ratingSection" style="display:none;">
+            <div class="rating-hero">
+              <div class="rating-big-num" id="ratingBigNum">—</div>
+              <div class="rating-big-stars" id="ratingBigStars">—</div>
+              <div class="rating-big-count" id="ratingBigCount">—</div>
+            </div>
+            <div class="rating-breakdown" style="margin-bottom:24px;" id="ratingBreakdown">
+              <!-- filled by JS -->
+            </div>
+            <p style="font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Recent Reviews from Workers</p>
+            <div id="workerReviewsList"></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="index.html" class="logo">Skill<span>Hire</span></a><p>Connecting people with trusted local gig workers.</p></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">All Services</a></li></ul></div>
+    <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="workers.html">Workers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li>hello@skillhire.com</li><li>+91 9653188219</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 SkillHire.</span><span class="footer-credit">Made by Stuti Saxena</span></div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
